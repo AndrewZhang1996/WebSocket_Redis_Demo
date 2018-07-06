@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-4.1.xsd 
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+      ">
+
+	<!-- service层：写业务逻辑的。  -->
+	<!-- <context:component-scan base-package="com.etc.service"></context:component-scan> -->
+	<context:property-placeholder location="classpath:redis.properties" />
+	<!--  配置druid连接池 -->
+	<!-- <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close" >    
+       <property name="url" value="jdbc:mysql://localhost:3306/demo_1" />    
+       <property name="username" value="root" />    
+       <property name="password" value="root" />    
+       <property name="driverClassName" value="com.mysql.jdbc.Driver" />    
+    </bean> -->
+    
+    <!-- 以前：读取主xml：环境信息和子mapperxml   -->
+    <!-- <bean id="sqlSessionFacotry" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="dataSource" ref="dataSource"></property>
+    	<property name="mapperLocations" value="classpath:com/etc/mapperxml/*Mapper.xml"></property>
+    </bean> -->
+	
+	<!-- 	StudentMapper stumapper = session.getMapper(StudentMapper.class); -->    
+	<!--  扫描接口对应的包：； 自动实例化 -->
+	<!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.etc.dao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFacotry"></property>
+	</bean> -->
+
+
+    
+    <!-- 配置事务管理器： 可以获取连接（开启事务的）  -->
+    <!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean> -->
+    <!-- 激活Aop注解 @tanscational  -->
+    <!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+    
+	<import resource="redis-config.xml"/>
+</beans>
